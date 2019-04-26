@@ -77,16 +77,16 @@ A **PrimeFactorisationWorker** object needs to know the value of N for which it 
 
 For this exercise, keep the SwingWorker implementation simple. Don’t be concerned with making the SwingWorker cancellable or return intermediate results. The SwingWorker simply need to run so that in the background it computes the prime factors and returns them as a single final result. With, this in mind, implement **PrimeFactorisationWorker** as follows:
 
-- For the generic type parameters, use **List<Long> for T** (the first type parameter for SwingWorker) and **Void for V** (the second type parameter). This means that the final result of the SwingWorker is a List of Long values (the prime factors) and that the SwingWorker does not return any intermediate results.
-- Override **SwingWorker’s doInBackground()** method. The return type should be **List<Long>** (as specified for type T). This method can be implemented based on the code supplied in the Prime Factorization webpage. Recall that doInBackground() will be executed in a *separate thread*, managed by the *Swing framework*. It should not access any GUI components.
-- Override **SwingWorker’s done()** method. Recall that this method is executed after doInBackground() by the *Event Dispatch thread*, and that it’s thus safe to access GUI components. This method should retrieve doInBackground()’s result via a call to **get()** and update the **JTextArea** component to show the computed values. This is also the place to re-enable the **Compute** button and restore the default cursor.
+- For the generic type parameters, use **List< Long> for T** (the first type parameter for SwingWorker) and **Void for V** (the second type parameter). This means that the final result of the SwingWorker is a List of Long values (the prime factors) and that the SwingWorker does not return any intermediate results.
+- Override **SwingWorker’s doInBackground()** method. The return type should be **List< Long>** (as specified for type T). This method can be implemented based on the code supplied in the Prime Factorization webpage. Recall that doInBackground() will be executed in a *separate thread*, managed by the *Swing framework*. It should not access any GUI components.
+- Override **SwingWorker’s done()** method. Recall that this method is executed after doInBackground() by the *Event Dispatch thread*, and that it’s thus safe to access GUI components. This method should retrieve doInBackground()’s result via a call to **get()** and update the `JTextArea` component to show the computed values. This is also the place to re-enable the `Compute` button and restore the default cursor.
 
 ## Exercise Three: A Cancellable SwingWorker
 For this exercise, we’ll further develop **PrimeFactorsSwingApp** so that the user can abort any ongoing computation. If you like, make a copy of PrimeFactorsSwingApp and rename it something else, such as **CancellablePrimeFactorsSwingApp**.
 
 The GUI for the application should include an extra button, Abort, as shown below.
 
-![](lab14ex03img1.PNG)
+![](lab14ex03img1.png)
 
 Figure 2: Addition of an Abort button which allows the user to cancel an in-progress factorization operation.
 
@@ -95,7 +95,7 @@ Similarly to lab 13’s exercise five step three, just as a **Runnable** object 
 ### Hints
 Declare the new Abort button, along with the Compute button, as an instance variable of the Swing application class. This way, it can be accessed by methods within both the application class and nested **PrimeFactorisationWorker** class. Method **done()** of **PrimeFactorisationWorker** should be responsible for changing the enabled/disabled status of the buttons  at the end of the computation.
 
-Declare the **PrimeFactorisationWorker** object to also be an instance variable of the Swing application class (as opposed to a local variable within the Compute button’s **ActionListener**). This will allow the ActionListener for the Abort button to access the **SwingWorker** to cancel it.
+Declare the **PrimeFactorisationWorker** object to also be an instance variable of the Swing application class (as opposed to a local variable within the `Compute` button’s **ActionListener**). This will allow the ActionListener for the Abort button to access the **SwingWorker** to cancel it.
 
 ## Exercise Four: Reporting Intermediate Results
 The final refinement of the Swing application for computing prime factors involves having the SwingWorker produce intermediate results. For some values of N, the algorithm finds multiple factors over its execution. Rather than wait for all factors be found before presenting them on the GUI, this exercise involves making the SwingWorker report each factor as soon as it is found.
@@ -104,8 +104,8 @@ The GUI for this version of the application looks the same as that for exercise 
 
 1. Change the V type argument from **Void** to **Long** to indicate that intermediate Long values (prime factors) will be generated.
 2. In method **doInBackground()**, whenever a new prime factor is found, publish the new value.
-3. Override method **process()** to update the **JTextArea** component with the new prime factor. Recall that this method is called by the *Event Dispatch thread*, and it is intended to update GUI components based on a partial result from the long running computation.
-4. Change method **done()** – it no longer has to populate the **JTextArea** component because the prime factors have been added to the JTextArea as they’ve been found. **done()** simply needs to take care of setting the enabled/disabled status of the buttons and restoring the cursor.
+3. Override method **process()** to update the `JTextArea` component with the new prime factor. Recall that this method is called by the *Event Dispatch thread*, and it is intended to update GUI components based on a partial result from the long running computation.
+4. Change method **done()** – it no longer has to populate the `JTextArea` component because the prime factors have been added to the JTextArea as they’ve been found. **done()** simply needs to take care of setting the enabled/disabled status of the buttons and restoring the cursor.
 
 
 ## Exercise Five: Bouncy Images
@@ -117,7 +117,7 @@ Modify the **ImageShape** class so that it performs its image loading and scalin
 When scaling an image using **Image.getScaledInstance()**, the returned image will be scaled *lazily*. That is, the scaling operation won’t actually be run until the first time the image is used. If the first time the image is used is when its drawn in the **paint()** method, this can cause unexpected stuttering. One way around this is to use the image in some way before returning it from the background thread. Anything will do, even just, for example, calling its **getWidth(…)** method.
 
 
-![](lab14ex05img1.PNG)
-![](lab14ex05img2.PNG)
+![](lab14ex05img1.png)
+![](lab14ex05img2.png)
 
 Figure 3: An example showing several ImageShapes, both during (left) and after (right) image loading.
