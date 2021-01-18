@@ -55,10 +55,10 @@ public class AnimationViewer extends JPanel implements ActionListener {
         shapes.add(new ImageShape(20, 20, 3, 4, 365/3, 354/3, "TRex.png"));
 
         shapes.add(new ImageShape(50, 30, 5, 2, 256, 160,
-                new URL("https://unsplash.com/photos/gM6k0JmHIBE")));
+                new URL("https://image.shutterstock.com/image-vector/star-icon-black-shape-flat-260nw-1663493722.jpg")));
 
         shapes.add(new ImageShape(100, 100, 6, 1, 256, 160,
-                new URL("https://unsplash.com/photos/Bkci_8qcdvQ")));
+                new URL("https://arbs.nzcer.org.nz/sites/default/files/images/curved-shape-II.png")));
 
         shapes.add(new ImageShape(500, 300, 4, 6, 256, 160, "charizard.jpg"));
 
